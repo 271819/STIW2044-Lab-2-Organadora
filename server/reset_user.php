@@ -35,7 +35,7 @@ function sendEmail($otp,$newpass,$user_email){
     $mail->Host       = 'mail.crimsonwebs.com';             //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                               //Enable SMTP authentication
     $mail->Username   = 'organadora@crimsonwebs.com';       //SMTP username
-    $mail->Password   = 'w28J0CyfDygZ';                     //SMTP password
+    $mail->Password   = '';                     //SMTP password
     $mail->SMTPSecure = 'tls';         
     $mail->Port       = 587;
     
