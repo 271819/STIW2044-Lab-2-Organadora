@@ -24,7 +24,7 @@ class _OrgagramScreenState extends State<OrgagramScreen> {
   @override
   void initState() {
     super.initState();
-    tabchildren = [TabLatestGram(), TabNewGram(), TabYourGram()];
+    tabchildren = [TabLatestGram(), TabNewGram(user: widget.user), TabYourGram()];
   }
   
 

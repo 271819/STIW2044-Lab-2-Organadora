@@ -44,7 +44,7 @@ class _MydrawerState extends State<Mydrawer> {
                     MaterialPageRoute(
                         builder: (content) => MainScreen(user: widget.user)));
               }),
-          ListTile(
+         /* ListTile(
               title: Text("Organic Gram",style : TextStyle(fontSize:20)),
               onTap: () {
                 Navigator.pop(context); 
@@ -53,9 +53,12 @@ class _MydrawerState extends State<Mydrawer> {
                     MaterialPageRoute(
                         builder: (content) =>
                             OrgagramScreen(user: widget.user)));
-              }),
+              }),*/
           ListTile(
-            title: Text("Favourite",style : TextStyle(fontSize:20)),
+            title: Text("Organic Products",style : TextStyle(fontSize:20)),
+          ),
+          ListTile(
+            title: Text("Your Carts",style : TextStyle(fontSize:20)),
           ),
           ListTile(
             title: Text("Log out",style : TextStyle(fontSize:20)),
