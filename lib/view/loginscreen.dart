@@ -199,25 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
         body: {"email": emailreset}).then((response) {
       print("Email reset " + emailreset);
       print(response.body);
-      if (response.body == "success") {
-        Fluttertoast.showToast(
-            msg: "Please Check your email ",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Color.fromRGBO(191, 30, 46, 50),
-            textColor: Colors.white,
-            fontSize: 23.0);
-      } else {
-        Fluttertoast.showToast(
-            msg: "Failed to reset password",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Color.fromRGBO(191, 30, 46, 50),
-            textColor: Colors.white,
-            fontSize: 23.0);
-      }
+     
     });
   }
 
