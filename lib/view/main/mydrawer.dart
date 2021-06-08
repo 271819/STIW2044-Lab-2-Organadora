@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:organadora/view/loginscreen.dart';
-import 'package:organadora/view/mainscreen.dart';
-import 'package:organadora/view/orgagramscreen.dart';
-import 'package:organadora/user.dart';
+import 'package:organadora/view/main/loginscreen.dart';
+import 'package:organadora/view/main/mainscreen.dart';
+import 'package:organadora/view/others/orgagramscreen.dart';
+import 'package:organadora/view/main/user.dart';
 
 class Mydrawer extends StatefulWidget {
   final User user;

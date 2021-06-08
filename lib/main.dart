@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:organadora/view/splashscreen.dart';
+import 'package:organadora/view/main/splashscreen.dart';
+
 void main() => runApp(MyApp());
  
 class MyApp extends StatelessWidget {

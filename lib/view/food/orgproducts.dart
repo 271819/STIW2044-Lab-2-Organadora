@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/user.dart';
-import 'package:organadora/view/food/addorgproducts.dart';
+import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/others/addorgproducts.dart';
 import 'package:organadora/view/food/products.dart';
-import 'package:organadora/view/mydrawer.dart';
+import 'package:organadora/view/main/mydrawer.dart';
  
 class OrgProductsScreen extends StatefulWidget {
     final Products products; 
@@ -127,74 +127,19 @@ class _OrgProductsScreenState extends State<OrgProductsScreen> {
                       child: Text("Qty: "+productlist[index]['quantity'],
                         style:TextStyle(fontSize: 18,)),
                     ),
-                    ],
-                  )
-                )
-              ),
+                    ])
+                )),
               SizedBox(height: 15),
             ],
-          )
-          ),
-      )
-    );
-  }),
-    )
-  ),
-  ),
-  ],
-)),
-  ),
-  floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-    floatingActionButton: FloatingActionButton(
-      child: Icon(Icons.add),
-      backgroundColor: Colors.redAccent,
-      onPressed: addproduct,
-    )
-    );
-  }
-  
-  addproduct() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-            Radius.circular(20),
           )),
-          title: Text("Add new product", style: TextStyle(fontSize: 25)),
-          content: new Container(
-            height: 100,
-            width:40,
-            child: Column(
-              children: [
-                SizedBox(height: 15),
-                Text("Are you sure you want to add a new product?",
-                    style: TextStyle(fontSize: 21)),
-                SizedBox(height: 15),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.push(context,
-                MaterialPageRoute(builder: (content) => AddOrgProducts()));
-              },
-            ),
-            TextButton(
-                child: Text("Cancel"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-          ],
-        );
-      },
-    );
-  }
-
+         ));
+        }),
+      )),
+      )],
+    )),
+  ));
+}
+  
   _loadproducts(String name) {
     print(name);
       http.post(

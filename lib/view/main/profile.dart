@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:organadora/user.dart';
+import 'package:organadora/view/main/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/view/mainscreen.dart';
+import 'package:organadora/view/main/mainscreen.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class Profile extends StatefulWidget {

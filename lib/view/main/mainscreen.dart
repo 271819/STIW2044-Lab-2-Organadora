@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:organadora/view/food/cart.dart';
 import 'package:organadora/view/food/foodcategories.dart';
 import 'package:organadora/view/food/orgproducts.dart';
-import 'package:organadora/view/mydrawer.dart';
-import 'package:organadora/user.dart';
-import 'package:organadora/view/profile.dart';
+import 'package:organadora/view/main/mydrawer.dart';
+import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/main/profile.dart';
 
 class MainScreen extends StatefulWidget {
   final User user;

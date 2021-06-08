@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:organadora/view/loginscreen.dart';
+import 'package:organadora/view/main/loginscreen.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {

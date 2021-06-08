@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/motiontabbar.dart';
-import 'package:organadora/view/mydrawer.dart';
-import 'package:organadora/user.dart';
-import 'package:organadora/view/tabgram/tablatestgram.dart';
-import 'package:organadora/view/tabgram/tabnewgram.dart';
-import 'package:organadora/view/tabgram/tabyourgram.dart';
+import 'package:organadora/view/main/mydrawer.dart';
+import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/others/tablatestgram.dart';
+import 'package:organadora/view/others/tabnewgram.dart';
+import 'package:organadora/view/others/tabyourgram.dart';
 
 class OrgagramScreen extends StatefulWidget {
   final User user;

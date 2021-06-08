@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:organadora/view/food/orgproducts.dart';
-import 'package:organadora/view/mainscreen.dart';
-import 'package:organadora/view/registerscreen.dart';
+import 'package:organadora/view/main/mainscreen.dart';
+import 'package:organadora/view/main/registerscreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:organadora/user.dart';
+import 'package:organadora/view/main/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
