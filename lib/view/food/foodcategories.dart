@@ -109,6 +109,6 @@ _loadFoodDetail(int index) {
       images:categorieslist[index]['images'],
     );
      Navigator.push(
-                  context, MaterialPageRoute(builder: (content) => ProductScreen(categories:categories)));
+                  context, MaterialPageRoute(builder: (content) => ProductScreen()));
   }
 }

@@ -1,8 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:organadora/view/food/cart.dart';
+import 'package:organadora/view/food/mycart.dart';
 import 'package:organadora/view/food/foodcategories.dart';
 import 'package:organadora/view/food/orgproducts.dart';
+import 'package:organadora/view/food/productscreen.dart';
 import 'package:organadora/view/main/mydrawer.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:organadora/view/main/profile.dart';
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
               }
                if(title=="Products"){
                  Navigator.push(
-                  context, MaterialPageRoute(builder: (content) => OrgProductsScreen(user: widget.user)));
+                  context, MaterialPageRoute(builder: (content) => ProductScreen(user: widget.user)));
               }
               if(title=="Your Cart"){
                  Navigator.push(
