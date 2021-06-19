@@ -3,15 +3,17 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:organadora/view/food/mycart.dart';
 import 'package:organadora/view/food/productdetails.dart';
 import 'package:organadora/view/food/categories.dart';
+import 'package:organadora/view/main/user.dart';
 
 import 'products.dart';
  
 class ProductScreen extends StatefulWidget {
-    final Categories categories;
-
-  const ProductScreen({Key key, this.categories}) : super(key: key);
+    final Products product;
+    final User user;
+  const ProductScreen({Key key, this.product , this.user}) : super(key: key);
   @override
   _ProductScreenState createState() => _ProductScreenState();
 }
@@ -20,11 +22,14 @@ class _ProductScreenState extends State<ProductScreen> {
   double screenHeight, screenWidth;
   List productlist;
   TextEditingController qty = new TextEditingController();
+  TextEditingController srccontroller = new TextEditingController();
   String _titlecenter = "Loading Products...";
+  String name ="";
+  int cartitem =0;
   @override
   void initState() {
     super.initState();
-    _loadproducts();
+    _loadproducts(name);
   }
 
   @override
@@ -33,22 +38,42 @@ class _ProductScreenState extends State<ProductScreen> {
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.categories.categories),
+        title: Text("Organic Products"),
         actions: <Widget>[
+          Text(cartitem.toString()),
           Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  viewcart();
+                  Navigator.push(
+                  context, MaterialPageRoute(builder: (content) => Cart()));
                 },
                 child: Icon(Icons.shopping_cart, size: 30),
-              ))
+              )
+              ),
         ],
       ),
       body: Center(
         child: Container(
             child: Column(
           children: [
+            Padding(
+          padding: EdgeInsets.fromLTRB(10, 10, 10, 5),
+          child: TextFormField(
+                  controller: srccontroller,
+                  decoration: InputDecoration(
+                    hintText: "Search product",
+                    suffixIcon: IconButton(
+                      onPressed: () => _loadproducts(srccontroller.text.toString()),
+                      icon: Icon(Icons.search),
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                  ),
+                ),
+        ),
             productlist == null
                 ? Flexible(child: Center(child: Text(_titlecenter)))
                 : Flexible(
@@ -119,16 +144,24 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 
-  void _loadproducts() {
+  void _loadproducts(String name) {
     http.post(
         Uri.parse(
             "https://crimsonwebs.com/s271819/organadora/php/load_products.php"),
         body: {
-          "id":widget.categories.id,
+          'name':name,
         }).then((response) {
       if (response.body == "nodata") {
         _titlecenter = "Sorry no product";
-        return;
+         Fluttertoast.showToast(
+            msg: "No Product Found",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color.fromRGBO(191, 30, 46, 50),
+            textColor: Colors.white,
+            fontSize: 23.0);
+          return;
       } else {
         var jsondata = json.decode(response.body);
         productlist = jsondata["products"];
@@ -146,7 +179,7 @@ class _ProductScreenState extends State<ProductScreen> {
       weight:productlist[index]['weight'],
       quantity:productlist[index]['quantity'],
       ingredient:productlist[index]['ingredient'],
-      cateid: widget.categories.id,
+      //cateid: widget.categories.id,
       date:productlist[index]['date'],
     );
     print(productlist[index]['name']);
@@ -176,24 +209,23 @@ class _ProductScreenState extends State<ProductScreen> {
         }).then((response) {
         if (response.body == "failed") {
           Fluttertoast.showToast(
-              msg: "Failed to added product to your cart",
+              msg: "This product already added in your cart!",
               toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
+              gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 2,
               backgroundColor: Colors.red,
               textColor: Colors.white,
-              fontSize: 16.0);
+              fontSize: 20.0);
         } else {
           Fluttertoast.showToast(
               msg: "Successful added product to your cart!",
               toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
+              gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 2,
               backgroundColor: Colors.red,
               textColor: Colors.white,
-              fontSize: 16.0);
+              fontSize: 20.0);
         }
-        
   });
 }
 
