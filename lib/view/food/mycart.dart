@@ -2,14 +2,18 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:organadora/view/food/checkoutpage.dart';
+import 'package:organadora/view/food/payment.dart';
 import 'package:organadora/view/food/products.dart';
 import 'package:http/http.dart' as http;
+import 'package:organadora/view/food/updateaddress.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 class Cart extends StatefulWidget {
    final Products products;
    final User user;
-  const Cart({Key key, this.products, this.user}) : super(key: key);
+   final double total;
+  const Cart({Key key, this.products, this.user,this.total}) : super(key: key);
   @override
   _CartState createState() => _CartState();
 }
@@ -38,22 +42,19 @@ class _CartState extends State<Cart> {
       elevation: 10.0,
       insetAnimCurve: Curves.easeInOut,
     );
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(' Your Cart'),
-        ),
-           body: Center(
-        child: Container(
-            child: Column(
-          children: [
-            cartlist == null
-                ? Flexible(child: Center(child: Text(_titlecenter)))
-                : Flexible(
-                   child: Center(
+  return Scaffold(
+        body: Center(
+    child: Container(
+        child: Column(
+      children: [
+        cartlist == null
+            ? Flexible(child: Center(child: Text(_titlecenter)))
+            : Flexible(
+                child: Center(
       child: GridView.count(
         crossAxisCount: 1,
         childAspectRatio:
-            (screenWidth / screenHeight) / 0.27,
+          (screenWidth / screenHeight) / 0.27,
         children:List.generate(cartlist.length, (index) {
           return Padding(
             padding: EdgeInsets.all(7),
@@ -92,7 +93,7 @@ class _CartState extends State<Cart> {
                   ),
                   SizedBox(height:10),
                   
-                    Text("RM"+ (double.parse(cartlist[index]['price'])).toStringAsFixed(2),
+                    Text("RM"+ cartlist[index]['price'],
                       style:TextStyle(fontSize: 21,color: Colors.red)),
                   
                   Padding(
@@ -157,17 +158,24 @@ class _CartState extends State<Cart> {
                 height: 1,
               ),
               Text(
-                "TOTAL: RM " + _totalprice.toStringAsFixed(2),
+                "TOTAL Payment: \n\t\t\t\tRM " + _totalprice.toStringAsFixed(2),
                 style:
-                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+                    TextStyle(fontSize: 22, fontWeight: FontWeight.bold,
                     color: Colors.red),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _payDialog();
-                },
-                child: Text("CHECKOUT"),
-              )
+              Container(
+                height:50,
+                color: Colors.red,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                     backgroundColor: MaterialStateProperty.all(Colors.red),
+                  ),
+                  onPressed: () {
+                    _payDialog();
+                  },
+                  child: Text("CHECKOUT"),
+                ),
+              ),
             ],
           )),
       ],
@@ -181,14 +189,13 @@ class _CartState extends State<Cart> {
         Uri.parse(
             "https://crimsonwebs.com/s271819/organadora/php/load_cart.php"),
         body: {}).then((response) {
+          print(response.body);
       if (response.body == "nodata") {
         _titlecenter = "Sorry no product";
         return;
       }else {
         var jsondata = json.decode(response.body);
         cartlist = jsondata["cart"];
-        
-         _titlecenter = "";
         _totalprice = 0.0;
         for (int i = 0; i < cartlist.length; i++) {
           _totalprice = _totalprice +
@@ -268,13 +275,12 @@ class _CartState extends State<Cart> {
               TextButton(
                 child: Text("Yes"),
                 onPressed: () async {
-                  /*Navigator.of(context).pop();
+                  Navigator.of(context).pop();      
                   await Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => CheckOutPage(
-                          email: widget.email, total: _totalprice),
+                      builder: (context) => UpdateAddress(total: _totalprice,user: widget.user,),
                     ),
-                  );*/
+                  );
                 },
               ),
               TextButton(
@@ -283,8 +289,8 @@ class _CartState extends State<Cart> {
                 Navigator.of(context).pop();
               }),
             ]),
-      context: context);
-    }
+          context: context);
+        }
   }
 
   void _deleteCartDialog(int index) {

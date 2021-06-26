@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:organadora/view/main/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/view/main/mainscreen.dart';
+import 'package:organadora/view/main/loginscreen.dart';
+import 'package:organadora/view/main/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class Profile extends StatefulWidget {
@@ -17,13 +17,8 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-
 class _ProfileState extends State<Profile> {
-  @override
-  void initState() {
-    super.initState();
-    
-  }
+  double screenHeight, screenWidth;
   File _image;
   String pathAsset = "assets/images/profile.png";
   bool _isEnable = false;
@@ -31,18 +26,18 @@ class _ProfileState extends State<Profile> {
   ProgressDialog pr;
   TextEditingController nameController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
-  
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
     nameController.text = widget.user.name;
     phoneController.text = widget.user.phone;
-     Container(
-        child: CachedNetworkImage(
-          imageUrl:
-              "https://crimsonwebs.com/s271819/organadora/images/profile_image/.png",
-        ),
-      );
-      // ignore: missing_required_param
+    // ignore: missing_required_param
     pr = ProgressDialog(context);
     pr.style(
       message: 'Updating...',
@@ -53,19 +48,6 @@ class _ProfileState extends State<Profile> {
       insetAnimCurve: Curves.easeInOut,
     );
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your Profile'),
-        actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  _saveChange();
-                },
-                child: Icon(Icons.save, size: 30),
-              ))
-        ],
-      ),
       body: SingleChildScrollView(
         child: Container(
           child: Padding(
@@ -74,7 +56,7 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
+                   GestureDetector(
                         onTap: () => {_onUploadPic()},
                         child: Container(
                           height: 210,
@@ -93,13 +75,25 @@ class _ProfileState extends State<Profile> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         )),
+                        /*Card(
+                          child: InkWell(
+                          onTap: ()=>{_onUploadPic()},
+                        child:Container(
+                        height: 220,
+                        width: 350,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "https://crimsonwebs.com/s271819/organadora/images/profile_image/0.png",
+                        ),
+                      ),
+                    ),
+                    ),*/
                     SizedBox(height: 20),
                     Divider(
                       color: Colors.grey,
                       height: 20,
                       thickness: 5,
                     ),
-                    
                     SizedBox(height: 20),
                     Container(
                       child: Row(
@@ -130,7 +124,7 @@ class _ProfileState extends State<Profile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Phone:   " ,style: TextStyle(fontSize: 20)),
+                          Text("Phone:   ", style: TextStyle(fontSize: 20)),
                           Container(
                             width: 170,
                             child: TextField(
@@ -154,10 +148,30 @@ class _ProfileState extends State<Profile> {
                     SizedBox(height: 20),
                     Text("Email:  " + widget.user.email,
                         style: TextStyle(fontSize: 20)),
+                    SizedBox(height: 15),
+
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      minWidth: 200,
+                      height: 50,
+                      color: Colors.blueAccent,
+                      child: Text("Update Information",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      onPressed: _saveChange,
+                    ),
                   ],
                 ),
               )),
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.exit_to_app),
+        backgroundColor: Colors.black,
+        onPressed: _onlogout,
       ),
     );
   }
@@ -207,6 +221,19 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> _updateInformation() async {
+    if (
+        nameController.text.toString() == "" ||
+        phoneController.text.toString() == "") {
+      Fluttertoast.showToast(
+          msg: "Some of the field are empty!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromRGBO(191, 30, 46, 50),
+          textColor: Colors.white,
+          fontSize: 19.0);
+      return;
+    }
     pr = ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: true, showLogs: true);
     await pr.show();
@@ -243,9 +270,9 @@ class _ProfileState extends State<Profile> {
         pr.hide().then((isHidden) {
           print(isHidden);
         });
-        Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (content) => MainScreen(user: widget.user)));
-        
+        /*Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (content) => MainScreen(user: widget.user)));*/
+
       } else {
         Fluttertoast.showToast(
             msg: "Failed",
@@ -255,12 +282,37 @@ class _ProfileState extends State<Profile> {
             backgroundColor: Color.fromRGBO(191, 30, 46, 50),
             textColor: Colors.white,
             fontSize: 23.0);
-            pr.hide().then((isHidden) {
+        pr.hide().then((isHidden) {
           print(isHidden);
         });
       }
     });
   }
 
+  void _onlogout() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            title: Text("Log out the account?"),
+            content: Text("Are you sure?"),
+            actions: [
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (content) => LoginScreen()));
+                },
+              ),
+              TextButton(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+            ],
+          );
+        });
+  }
 }
-

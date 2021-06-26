@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:organadora/view/food/organicproduct.dart';
 import 'package:organadora/view/food/orgproducts.dart';
 import 'package:organadora/view/main/mainscreen.dart';
 import 'package:organadora/view/main/registerscreen.dart';
@@ -237,14 +238,13 @@ class _LoginScreenState extends State<LoginScreen> {
         User user = User(
             email: email,
             password: password,
-            // name: userdata[1],
+            name: userdata[1],
             datereg: userdata[2],
             rating: userdata[3],
             credit: userdata[4],
             status: userdata[5]);
-        Navigator.push(context,
-            //MaterialPageRoute(builder: (content) => OrgProductsScreen(user: user)));
-            MaterialPageRoute(builder: (content) => MainScreen(user: user)));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (content) => OrganicProduct(user: user)));
       }
     });
   }

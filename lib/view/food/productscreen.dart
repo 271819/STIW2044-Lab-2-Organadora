@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:organadora/view/food/mycart.dart';
 import 'package:organadora/view/food/productdetails.dart';
-import 'package:organadora/view/food/categories.dart';
 import 'package:organadora/view/main/user.dart';
 
 import 'products.dart';
@@ -37,7 +36,7 @@ class _ProductScreenState extends State<ProductScreen> {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
+     /* appBar: AppBar(
         title: Text("Organic Products"),
         actions: <Widget>[
           Text(cartitem.toString()),
@@ -52,7 +51,7 @@ class _ProductScreenState extends State<ProductScreen> {
               )
               ),
         ],
-      ),
+      ),*/
       body: Center(
         child: Container(
             child: Column(
@@ -179,7 +178,6 @@ class _ProductScreenState extends State<ProductScreen> {
       weight:productlist[index]['weight'],
       quantity:productlist[index]['quantity'],
       ingredient:productlist[index]['ingredient'],
-      //cateid: widget.categories.id,
       date:productlist[index]['date'],
     );
     print(productlist[index]['name']);
