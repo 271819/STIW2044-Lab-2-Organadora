@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:organadora/view/food/checkoutpage.dart';
-import 'package:organadora/view/food/payment.dart';
+import 'package:organadora/view/cart/checkoutpage.dart';
+import 'package:organadora/view/cart/payment.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -25,7 +25,7 @@ class _UpdateAddressState extends State<UpdateAddress> {
   Widget build(BuildContext context) {
     pr = ProgressDialog(context);
     pr.style(
-      message: 'Setting new Address...',
+      message: 'Please Wait...',
       borderRadius: 5.0,
       backgroundColor: Colors.white,
       progressWidget: CircularProgressIndicator(),
@@ -164,7 +164,7 @@ class _UpdateAddressState extends State<UpdateAddress> {
       Fluttertoast.showToast(
           msg: "Some of the field are empty!",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
+          gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 2,
           backgroundColor: Color.fromRGBO(191, 30, 46, 50),
           textColor: Colors.white,
@@ -178,7 +178,7 @@ class _UpdateAddressState extends State<UpdateAddress> {
     String poscode = pcdController.text.toString();
     String state = stateController.text.toString();
     String area = areaController.text.toString();
-    String address = details + " " + poscode + " " + area + " " + state;
+    String address = details + ", " + poscode + " " + area + ", " + state;
     print(details);
     print(poscode);
     print(state);
@@ -194,7 +194,7 @@ class _UpdateAddressState extends State<UpdateAddress> {
       print(response.body);
       if (response.body == "success") {
         Fluttertoast.showToast(
-            msg: "Successfully set new address ",
+            msg: "Successfully set a new address ",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -216,7 +216,7 @@ class _UpdateAddressState extends State<UpdateAddress> {
         Fluttertoast.showToast(
             msg: "Failed",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
+            gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
             backgroundColor: Color.fromRGBO(191, 30, 46, 50),
             textColor: Colors.white,
@@ -229,9 +229,21 @@ class _UpdateAddressState extends State<UpdateAddress> {
   }
 
   void _oldaddress() {
+     if (widget.user.address=="") {
+      Fluttertoast.showToast(
+          msg: "You haven't set up a new address",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Color.fromRGBO(191, 30, 46, 50),
+          textColor: Colors.white,
+          fontSize: 19.0);
+      return;
+    }else{
      Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (content) => CheckOutPage(user: widget.user)));
+  }
   }
 }

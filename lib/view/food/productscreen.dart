@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/view/food/mycart.dart';
+import 'package:organadora/view/cart/mycart.dart';
 import 'package:organadora/view/food/productdetails.dart';
 import 'package:organadora/view/main/user.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 import 'products.dart';
  
@@ -24,7 +25,7 @@ class _ProductScreenState extends State<ProductScreen> {
   TextEditingController srccontroller = new TextEditingController();
   String _titlecenter = "Loading Products...";
   String name ="";
-  int cartitem =0;
+  ProgressDialog pr;
   @override
   void initState() {
     super.initState();
@@ -35,23 +36,16 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
+    pr = ProgressDialog(context);
+    pr.style(
+      message: 'Adding product to your cart...',
+      borderRadius: 5.0,
+      backgroundColor: Colors.white,
+      progressWidget: CircularProgressIndicator(),
+      elevation: 10.0,
+      insetAnimCurve: Curves.easeInOut,
+    );
     return Scaffold(
-     /* appBar: AppBar(
-        title: Text("Organic Products"),
-        actions: <Widget>[
-          Text(cartitem.toString()),
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                  context, MaterialPageRoute(builder: (content) => Cart()));
-                },
-                child: Icon(Icons.shopping_cart, size: 30),
-              )
-              ),
-        ],
-      ),*/
       body: Center(
         child: Container(
             child: Column(
@@ -185,13 +179,11 @@ class _ProductScreenState extends State<ProductScreen> {
                   context, MaterialPageRoute(builder: (content) => ProductDetails(products: product)));
 }
 
-  void favourite() {
-  }
 
-  void viewcart() {
-  }
-
-  void _addtocart(int index) {
+  Future<void> _addtocart(int index) async {
+      pr = ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: true, showLogs: true);
+    await pr.show();
     String prid = productlist[index]['prid'];
     String name = productlist[index]['name'];
     String price = productlist[index]['price'];
@@ -200,6 +192,7 @@ class _ProductScreenState extends State<ProductScreen> {
         Uri.parse(
             "https://crimsonwebs.com/s271819/organadora/php/insert_cart.php"),
         body: {
+          "email":widget.user.email,
           "price": price,
           "prid":prid,
           "name":name,
@@ -214,6 +207,9 @@ class _ProductScreenState extends State<ProductScreen> {
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 20.0);
+          pr.hide().then((isHidden) {
+          print(isHidden);
+        });
         } else {
           Fluttertoast.showToast(
               msg: "Successful added product to your cart!",
@@ -223,6 +219,9 @@ class _ProductScreenState extends State<ProductScreen> {
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 20.0);
+              pr.hide().then((isHidden) {
+              print(isHidden);
+        });
         }
   });
 }

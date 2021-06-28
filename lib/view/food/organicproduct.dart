@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/motiontabbar.dart';
-import 'package:organadora/view/food/mycart.dart';
+import 'package:organadora/view/cart/mycart.dart';
 import 'package:organadora/view/food/productscreen.dart';
-import 'package:organadora/view/main/mydrawer.dart';
 import 'package:organadora/view/main/profile.dart';
 import 'package:organadora/view/main/user.dart';
 

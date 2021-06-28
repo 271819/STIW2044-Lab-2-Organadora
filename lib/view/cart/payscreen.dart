@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:organadora/view/food/payment.dart';
+import 'package:organadora/view/cart/payment.dart';
+import 'package:organadora/view/food/productscreen.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -19,7 +19,14 @@ class _PayScreenState extends State<PayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Material App Bar'),
+        title: Text('Payment'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed:(){
+            _backButton();
+          }
+        )
       ),
       body: Center(
         child: Column(
@@ -27,14 +34,16 @@ class _PayScreenState extends State<PayScreen> {
             Expanded(
               child: WebView(
                 initialUrl:
-                    "https://crimsonwebs.com/s271819/organadora/php/bill_generate.php" +
+                    'https://crimsonwebs.com/s271819/organadora/php/bill_generate.php?email=' +
                         widget.user.email +
-                        '&phone=' +
+                        '&mobile=' +
                         widget.user.phone +
                         '&name=' +
                         widget.user.name +
+                        '&message=' +
+                        widget.payment.message +
                         '&amount=' +
-                        widget.payment.totalpayment.toString(),
+                        widget.payment.totalpayment.toStringAsFixed(2),
                 javascriptMode: JavascriptMode.unrestricted,
                 onWebViewCreated: (WebViewController webViewController) {
                   _controller.complete(webViewController);
@@ -45,5 +54,11 @@ class _PayScreenState extends State<PayScreen> {
         ),
       ),
     );
+  }
+
+  void _backButton() {
+     Navigator.push(context,
+            MaterialPageRoute(
+                builder: (content) => ProductScreen(user: widget.user)));
   }
 }

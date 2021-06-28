@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:organadora/view/food/payment.dart';
-import 'package:organadora/view/food/payscreen.dart';
+import 'package:organadora/view/cart/payment.dart';
+import 'package:organadora/view/cart/payscreen.dart';
 import 'dart:convert';
-import 'package:organadora/view/food/updateaddress.dart';
+import 'package:organadora/view/cart/updateaddress.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -54,48 +54,48 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: InkWell(
-                        onTap: () => setaddress(),
-                        child: Column(
+                    onTap: () => setaddress(),
+                    child: Column(
+                      children: [
+                        Container(
+                            child: Row(
                           children: [
-                            Container(
-                                child: Text("Delivery Address",
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                    ))),
-                            Container(
-                                child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(30, 5, 0, 0),
-                                  child: Text( widget.user.name +" |\t "+widget.user.phone,
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ),
-                              ],
-                            )),
-                            Container(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding:const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                                    child: Text(widget.user.email,
-                                        style: TextStyle(fontSize: 18)),
-                                  ),
-                                ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(18, 15, 0, 0),
+                              child: Text( widget.user.name +" |\t "+widget.user.phone,
+                                style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Container(
-                              child: Wrap(
-                                children: [
-                                  Padding(
-                                    padding:const EdgeInsets.fromLTRB(30, 10, 0, 0),
-                                    child: Text(widget.user.address,
-                                        style: TextStyle(fontSize: 18)),
-                                  ),
-                                ],
+                          ],
+                        )),
+                        Container(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding:const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                                child: Text(widget.user.email,
+                                    style: TextStyle(fontSize: 18)),
                               ),
-                            ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Wrap(
+                            children: [
+                              Padding(
+                                padding:const EdgeInsets.fromLTRB(30, 10, 10, 15),
+                                child: Text(widget.user.address,
+                                    style: TextStyle(fontSize: 18)),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                            child: Text("Make sure the Delivery Address is correct!!!",
+                                style: TextStyle(
+                                  color: Colors.red,
+                            ))),
                           ],
                         )),
                   ),
@@ -133,77 +133,78 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     ? Flexible(child: Center(child: Text(_titlecenter)))
                     : Flexible(
                         child: Center(
-                            child: GridView.count(
-                          crossAxisCount: 1,
-                          childAspectRatio:
-                              (screenWidth / screenHeight) / 0.15,
-                          children:
-                              List.generate(cartlist.length, (index) {
-                            return Padding(
-                                padding: EdgeInsets.all(7),
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 4,
-                                        child: Container(
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                "https://crimsonwebs.com/s271819/organadora/images/products/${cartlist[index]['prid']}.jpg",
-                                          ),
-                                        ),
+                        child: GridView.count(
+                      crossAxisCount: 1,
+                      childAspectRatio:
+                          (screenWidth / screenHeight) / 0.15,
+                      children:
+                          List.generate(cartlist.length, (index) {
+                        return Padding(
+                            padding: EdgeInsets.all(7),
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            "https://crimsonwebs.com/s271819/organadora/images/products/${cartlist[index]['prid']}.jpg",
                                       ),
-                                      Container(
-                                          height: 150,
-                                          child: VerticalDivider(
-                                            color: Colors.grey,
-                                            thickness: 1,
-                                          )),
+                                    ),
+                                  ),
+                                  Container(
+                                      height: 150,
+                                      child: VerticalDivider(
+                                        color: Colors.grey,
+                                        thickness: 1,
+                                      ),
+                                    ),
                             Expanded(
                                 flex: 6,
                                 child: Padding(
-                                    padding:const EdgeInsets.all(11.0),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.fromLTRB( 0, 0, 0, 5),
-                                            child: Text(cartlist[index] ['name'],
-                                                style: TextStyle(fontSize: 18,
-                                                    fontWeight:FontWeight .bold)),
-                                          ),
-                                          SizedBox(height: 10),
-                                          Text("\tRM " +cartlist[index]['price'],
-                                              style: TextStyle(fontSize: 15,color: Colors.red)),
-                                        ])
-                                    )),
+                                padding:const EdgeInsets.all(11.0),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment
+                                            .start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .center,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.fromLTRB( 0, 0, 0, 5),
+                                        child: Text(cartlist[index] ['name'],
+                                            style: TextStyle(fontSize: 16,
+                                                fontWeight:FontWeight .bold)),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text("\tRM " +cartlist[index]['price'],
+                                          style: TextStyle(fontSize: 15,color: Colors.red)),
+                                    ])
+                                )),
                               Expanded(
                                   flex: 3,
                                   child: Padding(
                                       padding:const EdgeInsets.all(11.0),
                                       child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment:MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:const EdgeInsets .fromLTRB(0, 0, 0, 5),
-                                              child: Text( "x " +cartlist[index][ 'quantity'],
-                                                  style: TextStyle(
-                                                      fontSize:18,
-                                                      fontWeight:FontWeight.bold)),
-                                            ),
-                                          ])
-                                        )),
-                                      ],
-                                    ),
-                                  ));
-                                }),
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:const EdgeInsets .fromLTRB(0, 0, 0, 5),
+                                          child: Text( "x " +cartlist[index][ 'quantity'],
+                                              style: TextStyle(
+                                                  fontSize:18,
+                                                  fontWeight:FontWeight.bold)),
+                                          ),
+                                        ])
+                                      )),
+                                    ],
+                                  ),
+                                ));
+                              }),
                               )),
                             ),
                       Divider(
@@ -395,7 +396,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       totalpayment:totalpayment,
                       );
 
-                  await Navigator.of(context).push(
+                  await Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => PayScreen(payment: payment,user: widget.user),
                     ),

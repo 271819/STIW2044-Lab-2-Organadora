@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:organadora/view/main/user.dart';
 import 'package:organadora/view/food/productscreen.dart';
-import 'package:organadora/view/food/categories.dart';
+import 'package:organadora/view/others/categories.dart';
 
 class FoodCategories extends StatefulWidget {
   final User user;

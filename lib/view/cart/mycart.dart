@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/view/food/checkoutpage.dart';
-import 'package:organadora/view/food/payment.dart';
 import 'package:organadora/view/food/products.dart';
 import 'package:http/http.dart' as http;
-import 'package:organadora/view/food/updateaddress.dart';
+import 'package:organadora/view/cart/updateaddress.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 class Cart extends StatefulWidget {
@@ -22,12 +20,14 @@ class _CartState extends State<Cart> {
  double screenHeight, screenWidth;
  double _totalprice =0.0;
   List cartlist;
+  int cartitem =0;
   ProgressDialog pr;
   String _titlecenter = "Loading Products...";
   @override
   void initState() {
     super.initState();
     _loadcart();
+    loadcartitem();
   }
     @override
     Widget build(BuildContext context) {
@@ -54,12 +54,12 @@ class _CartState extends State<Cart> {
       child: GridView.count(
         crossAxisCount: 1,
         childAspectRatio:
-          (screenWidth / screenHeight) / 0.27,
+          (screenWidth / screenHeight) / 0.26,
         children:List.generate(cartlist.length, (index) {
           return Padding(
-            padding: EdgeInsets.all(7),
+            padding: EdgeInsets.all(10),
             child: Card(
-          elevation: 10,
+          elevation: 4,
           child: InkWell(
             onTap: ()=>{},
             child: Row(
@@ -80,7 +80,7 @@ class _CartState extends State<Cart> {
             height: 150,
             child: VerticalDivider(color: Colors.grey,thickness:1,)),
             Expanded(
-              flex:5,
+              flex:6,
               child: Padding(
                 padding: const EdgeInsets.all(7.0),
                 child: Column(
@@ -119,8 +119,7 @@ class _CartState extends State<Cart> {
                             },
                           ),
                         ],
-                      ),
-                  ),
+                      ),),
                  ])
                 )),
             Expanded(
@@ -143,20 +142,28 @@ class _CartState extends State<Cart> {
         }),
       )),
       ),
+      Divider(
+        color: Colors.grey,
+        height: 18,
+        thickness: 1,
+      ),
       Container(
-          padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+        height:30,
+        width:500,
+        child:Text("Number of items: \t\t\t"+cartitem.toString(),
+        textAlign: TextAlign.center,
+        style:TextStyle(fontSize: 20,color: Colors.red),)
+      ),
+      Container(
+          padding: EdgeInsets.fromLTRB(10, 10, 20, 20),
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.black,
+              color: Colors.grey,
             ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Divider(
-                color: Colors.red,
-                height: 1,
-              ),
               Text(
                 "TOTAL Payment: \n\t\t\t\tRM " + _totalprice.toStringAsFixed(2),
                 style:
@@ -330,6 +337,17 @@ class _CartState extends State<Cart> {
         );
       },
     );
+  }
+  void loadcartitem() {
+    http.post(
+        Uri.parse(
+            "https://crimsonwebs.com/s271819/organadora/php/load_cartitem.php"),
+        body: {}).then((response) {
+      setState(() {
+        cartitem = int.parse(response.body);
+        print(cartitem);
+      });
+    });
   }
 
   Future<void> _deleteCart(int index) async {

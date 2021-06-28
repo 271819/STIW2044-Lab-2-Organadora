@@ -1,12 +1,10 @@
 class Payment{
-  String address,message,date;
+  String message,date;
   double totalpayment;
   Payment(
     { 
-      this.address,
       this.totalpayment,
       this.message,
-      this.date,
     }
   );
 }

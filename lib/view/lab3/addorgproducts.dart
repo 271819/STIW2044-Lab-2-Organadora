@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:organadora/view/food/orgproducts.dart';
+import 'package:organadora/view/lab3/orgproducts.dart';
  
 class AddOrgProducts extends StatefulWidget {
   @override

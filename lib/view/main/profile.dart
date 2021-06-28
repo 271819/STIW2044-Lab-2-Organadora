@@ -29,14 +29,15 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
+    nameController.text = widget.user.name;
+    phoneController.text = widget.user.phone;
   }
 
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    nameController.text = widget.user.name;
-    phoneController.text = widget.user.phone;
+    
     // ignore: missing_required_param
     pr = ProgressDialog(context);
     pr.style(
@@ -75,19 +76,6 @@ class _ProfileState extends State<Profile> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         )),
-                        /*Card(
-                          child: InkWell(
-                          onTap: ()=>{_onUploadPic()},
-                        child:Container(
-                        height: 220,
-                        width: 350,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "https://crimsonwebs.com/s271819/organadora/images/profile_image/0.png",
-                        ),
-                      ),
-                    ),
-                    ),*/
                     SizedBox(height: 20),
                     Divider(
                       color: Colors.grey,
@@ -221,19 +209,6 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> _updateInformation() async {
-    if (
-        nameController.text.toString() == "" ||
-        phoneController.text.toString() == "") {
-      Fluttertoast.showToast(
-          msg: "Some of the field are empty!",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Color.fromRGBO(191, 30, 46, 50),
-          textColor: Colors.white,
-          fontSize: 19.0);
-      return;
-    }
     pr = ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: true, showLogs: true);
     await pr.show();
@@ -255,10 +230,10 @@ class _ProfileState extends State<Profile> {
       print(response.body);
       if (response.body == "success") {
         Fluttertoast.showToast(
-            msg: "Success ",
+            msg: "Successfully update your info!!! ",
             toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 2,
             backgroundColor: Color.fromRGBO(191, 30, 46, 50),
             textColor: Colors.white,
             fontSize: 23.0);
@@ -270,8 +245,7 @@ class _ProfileState extends State<Profile> {
         pr.hide().then((isHidden) {
           print(isHidden);
         });
-        /*Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (content) => MainScreen(user: widget.user)));*/
+
 
       } else {
         Fluttertoast.showToast(

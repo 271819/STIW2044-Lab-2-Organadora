@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:organadora/view/food/mycart.dart';
-import 'package:organadora/view/food/foodcategories.dart';
-import 'package:organadora/view/food/orgproducts.dart';
+import 'package:organadora/view/cart/mycart.dart';
+import 'package:organadora/view/others/foodcategories.dart';
+import 'package:organadora/view/lab3/orgproducts.dart';
 import 'package:organadora/view/food/productscreen.dart';
 import 'package:organadora/view/main/mydrawer.dart';
 import 'package:organadora/view/main/user.dart';
