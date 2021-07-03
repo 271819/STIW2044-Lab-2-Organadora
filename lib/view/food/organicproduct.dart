@@ -3,7 +3,7 @@ import 'package:motion_tab_bar/motiontabbar.dart';
 import 'package:organadora/view/payment/mycart.dart';
 import 'package:organadora/view/food/productscreen.dart';
 import 'package:organadora/view/main/profile.dart';
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 
 class OrganicProduct extends StatefulWidget {
   final User user;

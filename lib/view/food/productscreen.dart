@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:organadora/view/food/productdetails.dart';
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import '../constructor/products.dart';

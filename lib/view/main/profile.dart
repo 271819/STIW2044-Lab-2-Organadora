@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:organadora/view/main/loginscreen.dart';
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class Profile extends StatefulWidget {

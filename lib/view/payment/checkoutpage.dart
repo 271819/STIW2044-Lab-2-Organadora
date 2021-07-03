@@ -5,7 +5,7 @@ import 'package:organadora/view/payment/mappage.dart';
 import 'package:organadora/view/constructor/payment.dart';
 import 'package:organadora/view/payment/payscreen.dart';
 import 'dart:convert';
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
 

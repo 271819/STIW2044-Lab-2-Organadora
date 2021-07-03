@@ -7,7 +7,7 @@ import 'package:ndialog/ndialog.dart';
 import 'package:organadora/view/payment/checkoutpage.dart';
 import 'package:organadora/view/constructor/delivery.dart';
 import 'package:organadora/view/constructor/payment.dart';
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 class MapPage extends StatefulWidget {
    final User user;
   final Payment payment;

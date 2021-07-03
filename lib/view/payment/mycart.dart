@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:organadora/view/payment/checkoutpage.dart';
 import 'package:organadora/view/constructor/products.dart';
 import 'package:http/http.dart' as http;
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 class Cart extends StatefulWidget {
    final Products products;

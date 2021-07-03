@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:organadora/view/constructor/payment.dart';
-import 'package:organadora/view/main/user.dart';
+import 'package:organadora/view/constructor/user.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PayScreen extends StatefulWidget {
