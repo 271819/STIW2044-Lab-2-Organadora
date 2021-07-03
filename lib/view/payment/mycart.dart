@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/view/food/products.dart';
+import 'package:organadora/view/payment/checkoutpage.dart';
+import 'package:organadora/view/constructor/products.dart';
 import 'package:http/http.dart' as http;
-import 'package:organadora/view/cart/updateaddress.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 class Cart extends StatefulWidget {
@@ -285,7 +285,7 @@ class _CartState extends State<Cart> {
                   Navigator.of(context).pop();      
                   await Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => UpdateAddress(total: _totalprice,user: widget.user,),
+                      builder: (context) => CheckOutPage(total: _totalprice,user: widget.user,),
                     ),
                   );
                 },

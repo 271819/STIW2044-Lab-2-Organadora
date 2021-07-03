@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:organadora/view/main/loginscreen.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -230,10 +229,10 @@ class _ProfileState extends State<Profile> {
       print(response.body);
       if (response.body == "success") {
         Fluttertoast.showToast(
-            msg: "Successfully update your info!!! ",
+            msg: "Successfully update your Profile !!! ",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 2,
+            timeInSecForIosWeb: 3,
             backgroundColor: Color.fromRGBO(191, 30, 46, 50),
             textColor: Colors.white,
             fontSize: 23.0);

@@ -1,8 +1,16 @@
 <?php
 include_once("dbconnect.php");
-$cateid = $_POST['id'];
-$sqlloadcategories ="SELECT * FROM products WHERE cateid ='$cateid'";
-$result = $conn-> query ($sqlloadcategories);
+
+$srcname = $_POST['name'];
+
+if ($srcname == "") {
+    $sqlloadproduct = "SELECT * FROM products ORDER BY Prid DESC";
+} 
+else{
+    $sqlloadproduct = "SELECT * FROM products WHERE Name LIKE '%$srcname%'";
+}
+
+$result = $conn-> query($sqlloadproduct);
 
 if($result ->num_rows >0){
     $response["products"]=array();
@@ -15,7 +23,6 @@ if($result ->num_rows >0){
         $list[quantity]=$row['Quantity'];
         $list[ingredient]=$row['Ingredient'];
         $list[date]=$row['datareg'];
-        $list[Images] = $row['Images'];
         array_push($response["products"],$list);
     }
     echo json_encode($response);

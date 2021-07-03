@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:organadora/view/food/organicproduct.dart';
-import 'package:organadora/view/lab3/orgproducts.dart';
-import 'package:organadora/view/main/mainscreen.dart';
 import 'package:organadora/view/main/registerscreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:organadora/view/main/user.dart';

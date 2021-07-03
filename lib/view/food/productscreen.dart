@@ -3,12 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:organadora/view/cart/mycart.dart';
 import 'package:organadora/view/food/productdetails.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
-import 'products.dart';
+import '../constructor/products.dart';
  
 class ProductScreen extends StatefulWidget {
     final Products product;
@@ -66,7 +65,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                   ),
                 ),
-        ),
+             ),
             productlist == null
                 ? Flexible(child: Center(child: Text(_titlecenter)))
                 : Flexible(

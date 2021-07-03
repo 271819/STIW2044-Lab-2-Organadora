@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/motiontabbar.dart';
-import 'package:organadora/view/cart/mycart.dart';
+import 'package:organadora/view/payment/mycart.dart';
 import 'package:organadora/view/food/productscreen.dart';
 import 'package:organadora/view/main/profile.dart';
 import 'package:organadora/view/main/user.dart';
@@ -50,7 +50,6 @@ class _OrganicProductState extends State<OrganicProduct> {
         centerTitle: true,
         toolbarHeight: 60,
       ),
-      //drawer: Mydrawer(user: widget.user),
       body: tabchildren[currentIndex],
     );
     

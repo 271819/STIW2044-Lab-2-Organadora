@@ -4,9 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:organadora/view/main/user.dart';
-import 'package:organadora/view/food/products.dart';
-import 'package:organadora/view/main/mydrawer.dart';
- 
+import 'package:organadora/view/constructor/products.dart';
 class OrgProductsScreen extends StatefulWidget {
     final Products products; 
     final User user;
@@ -45,7 +43,6 @@ class _OrgProductsScreenState extends State<OrgProductsScreen> {
               ))
         ],
       ),
-      drawer: Mydrawer(user: widget.user),
       body: Center(
         child: Container(
             child: Column(

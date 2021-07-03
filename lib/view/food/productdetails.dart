@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'products.dart';
+import '../constructor/products.dart';
 
 class ProductDetails extends StatefulWidget {
   final Products products;

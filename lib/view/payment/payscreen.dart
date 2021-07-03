@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:organadora/view/cart/payment.dart';
-import 'package:organadora/view/food/productscreen.dart';
+import 'package:organadora/view/constructor/payment.dart';
 import 'package:organadora/view/main/user.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -20,13 +19,6 @@ class _PayScreenState extends State<PayScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Payment'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.white,
-          onPressed:(){
-            _backButton();
-          }
-        )
       ),
       body: Center(
         child: Column(
@@ -55,10 +47,4 @@ class _PayScreenState extends State<PayScreen> {
       ),
     );
   }
-
-  void _backButton() {
-     Navigator.push(context,
-            MaterialPageRoute(
-                builder: (content) => ProductScreen(user: widget.user)));
   }
-}

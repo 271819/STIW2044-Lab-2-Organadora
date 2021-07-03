@@ -13,7 +13,7 @@ $result = $conn->query($sql);
         if($conn-> query($sqlupdate) ===TRUE){
             $decoded_string = base64_decode($encoded_string);
         $filename = mysqli_insert_id($conn);
-        $path = '../images/profile_image/'.$filename.'.png';
+        $path = '../images/profile_image/'.$filename.'.jpg';
         $is_written = file_put_contents($path, $decoded_string);
             echo 'success';
         }else{
