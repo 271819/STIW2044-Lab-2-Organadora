@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:organadora/view/constructor/payment.dart';
 import 'package:organadora/view/constructor/user.dart';
+import 'package:organadora/view/food/organicproduct.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PayScreen extends StatefulWidget {
@@ -18,7 +19,15 @@ class _PayScreenState extends State<PayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment'),
+        title: Text('Payment', style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.lightGreenAccent[400],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color:Colors.white,
+          onPressed:(){
+            _backButton();
+          }
+        )
       ),
       body: Center(
         child: Column(
@@ -35,7 +44,9 @@ class _PayScreenState extends State<PayScreen> {
                         '&message=' +
                         widget.payment.message +
                         '&amount=' +
-                        widget.payment.totalpayment.toStringAsFixed(2),
+                        widget.payment.totalpayment.toStringAsFixed(2)+
+                        '&address=' +
+                        widget.user.address,
                 javascriptMode: JavascriptMode.unrestricted,
                 onWebViewCreated: (WebViewController webViewController) {
                   _controller.complete(webViewController);
@@ -46,5 +57,12 @@ class _PayScreenState extends State<PayScreen> {
         ),
       ),
     );
+  }
+
+  void _backButton() {
+    Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (content) => OrganicProduct(user: widget.user)));
   }
   }

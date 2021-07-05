@@ -33,7 +33,8 @@ class _InputAddressState extends State<InputAddress> {
     );
     return Scaffold(
         appBar: AppBar(
-          title: Text('Enter your Address'),
+          title: Text('Enter your Address', style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.lightGreenAccent[400],
         ),
         body: SingleChildScrollView(
         child:Center(

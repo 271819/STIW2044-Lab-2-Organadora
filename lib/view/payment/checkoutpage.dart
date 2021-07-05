@@ -75,7 +75,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           child: Row(
                             children: [
                               Padding(
-                                padding:const EdgeInsets.fromLTRB(35, 0, 0, 0),
+                                padding:const EdgeInsets.fromLTRB(38, 0, 0, 0),
                                 child: Text(widget.user.email,
                                     style: TextStyle(fontSize: 18)),
                               ),

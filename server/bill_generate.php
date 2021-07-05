@@ -8,6 +8,7 @@ $name = $_GET['name'];
 $mobile = $_GET['mobile'];
 $amount = $_GET['amount'];
 $message = $_GET['message'];
+$address = $_GET['address'];
 
 $api_key ='2a6d876b-c9cf-4366-a033-b4f95ddcab15';
 $collection_id = 'wbsdurjw';
@@ -21,7 +22,7 @@ $data = array(
     'amount'=> $amount * 100,
     'description'=>'Payment for order',
     'callback_url'=> "https://crimsonwebs.com/s271819/organadora/php/return_url",
-    'redirect_url'=> "https://crimsonwebs.com/s271819/organadora/php/payment_update.php?email=$email&mobile=$mobile&message=$message&amount=$amount"
+    'redirect_url'=> "https://crimsonwebs.com/s271819/organadora/php/payment_update.php?email=$email&mobile=$mobile&message=$message&amount=$amount&address=$address"
     );
 
 $process = curl_init($host );
@@ -41,8 +42,5 @@ $bill = json_decode($return,true);
 
 echo "<pre>".print_r($bill,true)."</pre";
 header("Location: {$bill['url']}");
-
-
-
 
 ?>

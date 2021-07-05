@@ -6,6 +6,7 @@ $mobile = $_GET['mobile'];
 $amount = $_GET['amount'];
 $message = $_GET['message'];
 $email = $_GET['email'];
+$address = $_GET['address'];
 
 $data = array(
     'id'=> $_GET['billplz']['id'],
@@ -43,11 +44,12 @@ if ($paidstatus == "true"){
      
      echo '<br><br><body><div><h2><br><br><center>Your Receipt</center>
      </h1>
-     <table border =1 width=80% align=center>
+     <table border =1 width=85% align=center>
      <tr><td>Recept ID</td><td>'.$receiptid.'</td></tr><tr><td>Email to </td>
      <td>'.$email. '</td></tr><td>Amount </td><td>RM '.$amount.'</td></tr>
      <tr><td>Payment Status </td><td>'.$paidstatus.'</td></tr>
      <tr><td>Message </td><td>'.$message.'</td></tr>
+     <tr><td>Address </td><td>'.$address.'</td></tr>
      <tr><td>Date </td><td>'.date("d/m/Y").'</td></tr>
      <tr><td>Time </td><td>'.date("h:i a").'</td></tr>
      </table><br>
