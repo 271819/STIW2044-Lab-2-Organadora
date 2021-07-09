@@ -49,6 +49,7 @@ class _OrganicProductState extends State<OrganicProduct> {
         backgroundColor: Colors.lightGreenAccent[400],
         centerTitle: true,
         toolbarHeight: 60,
+        automaticallyImplyLeading: false,
       ),
       body: tabchildren[currentIndex],
     );
